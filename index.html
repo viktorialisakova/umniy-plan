@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Умный Планер на Месяц</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>📅 Умный Планер на Месяц</h1>
+    </header>
+
+    <!-- Форма создания/редактирования -->
+    <section class="card">
+        <h2 id="formTitle">➕ Добавить новую задачу</h2>
+        <form class="task-form" id="taskForm">
+            <input type="hidden" id="editTaskId">
+            <input type="text" id="taskTitle" placeholder="Название задачи..." required>
+            <input type="number" id="startDay" placeholder="Старт (1-30)" min="1" max="30" required>
+            <input type="number" id="endDay" placeholder="Конец (1-30)" min="1" max="30" required>
+            <select id="taskPriority">
+                <option value="low">Низкий (Синий)</option>
+                <option value="medium" selected>Средний (Зеленый)</option>
+                <option value="high">Высокий (Красный)</option>
+                <option value="urgent">Срочно (Фиолетовый)</option>
+            </select>
+            <div style="display: flex; gap: 5px;">
+                <button type="submit" id="submitBtn">Добавить</button>
+                <button type="button" id="cancelEditBtn" class="cancel-btn" style="display: none;" onclick="resetForm()">Отмена</button>
+            </div>
+        </form>
+        <hr style="margin: 20px 0; border: none; border-top: 1px solid var(--border);">
+        <ul class="task-list" id="taskList"></ul>
+    </section>
+
+    <!-- Диаграмма Ганта -->
+    <section class="card">
+        <h2>📊 Диаграмма Ганта</h2>
+        <div class="gantt-container">
+            <div class="gantt-chart">
+                <div></div>
+                <div class="gantt-header-cells" id="ganttHeader"></div>
+                <div id="ganttRows" style="display: contents;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Слайдер-отчет -->
+    <section class="card slider-section">
+        <h2>📈 Отчет выполнения целей</h2>
+        
+        <div class="slide active" id="slide1">
+            <h3>Общий прогресс месяца</h3>
+            <div class="progress-circle" id="totalProgressCircle">0%</div>
+            <p id="totalStatsText">0 из 0 задач выполнено</p>
+        </div>
+
+        <div class="slide" id="slide2">
+            <h3>Статус по периодам</h3>
+            <div style="margin-top: 20px; display: flex; justify-content: space-around;">
+                <div>
+                    <h4 style="color: var(--primary);">1-15 числа</h4>
+                    <p id="firstHalfText">0 задач</p>
+                </div>
+                <div>
+                    <h4 style="color: var(--success);">16-30 числа</h4>
+                    <p id="secondHalfText">0 задач</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="slider-nav">
+            <button class="nav-btn" onclick="changeSlide(-1)">◀ Назад</button>
+            <button class="nav-btn" onclick="changeSlide(1)">Вперед ▶</button>
+        </div>
+    </section>
+</div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
